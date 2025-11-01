@@ -28,6 +28,14 @@
         @apply card-badge bg-green-500/95 text-white border-white/20;
     }
     
+    .card-badge-danger {
+        @apply card-badge bg-red-500/95 text-white border-white/20;
+    }
+    
+    .card-badge-warning {
+        @apply card-badge bg-orange-500/95 text-white border-white/20;
+    }
+    
     .card-body {
         @apply p-8;
     }

@@ -14,7 +14,9 @@ class PropertyDetails extends Component
     public function mount($propertyId)
     {
         $this->propertyId = $propertyId;
-        $this->property = Property::withCount('bookings')->findOrFail($propertyId);
+        $this->property = Property::with(['bookings' => function($query) {
+            $query->where('status', '!=', 'cancelled');
+        }])->withCount('bookings')->findOrFail($propertyId);
     }
 
     public function render()

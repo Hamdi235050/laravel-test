@@ -13,9 +13,23 @@
         <div class="card-image-overlay"></div>
         
         <div class="absolute top-4 right-4">
-            <span class="card-badge-success">
-                Disponible
-            </span>
+            @php
+                $status = $property->availability_status ?? 'available';
+            @endphp
+            
+            @if($status === 'reserved')
+                <span class="card-badge-danger">
+                    Réservée
+                </span>
+            @elseif($status === 'booked')
+                <span class="card-badge-warning">
+                    Réservation à venir
+                </span>
+            @else
+                <span class="card-badge-success">
+                    Disponible
+                </span>
+            @endif
         </div>
     </div>
 

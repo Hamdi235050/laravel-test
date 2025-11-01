@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $properties = \App\Models\Property::withCount('bookings')->paginate(9);
+    $properties = \App\Models\Property::with(['bookings' => function($query) {
+        $query->where('status', '!=', 'cancelled');
+    }])->withCount('bookings')->paginate(9);
     return view('properties.index', compact('properties'));
 })->name('home');
 

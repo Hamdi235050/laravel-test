@@ -132,7 +132,9 @@ class BookingManager extends Component
     
     public function getPropertiesProperty()
     {
-        $query = Property::query();
+        $query = Property::with(['bookings' => function($query) {
+            $query->where('status', '!=', 'cancelled');
+        }]);
 
          if ($this->search) {
             $query->where(function($q) {
@@ -143,6 +145,19 @@ class BookingManager extends Component
 
          if ($this->maxPrice) {
             $query->where('price_per_night', '<=', $this->maxPrice);
+        }
+
+        // Filtrer par statut
+        if ($this->statusFilter === 'available') {
+            $query->whereDoesntHave('bookings', function($q) {
+                $q->where('status', '!=', 'cancelled')
+                  ->where('check_out', '>=', now());
+            });
+        } elseif ($this->statusFilter === 'reserved') {
+            $query->whereHas('bookings', function($q) {
+                $q->where('status', '!=', 'cancelled')
+                  ->where('check_out', '>=', now());
+            });
         }
 
         
