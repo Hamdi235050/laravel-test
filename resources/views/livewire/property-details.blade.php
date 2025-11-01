@@ -1,11 +1,7 @@
 <div>
-     @if (session()->has('message'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
-            <span class="block sm:inline">{{ session('message') }}</span>
-        </div>
-    @endif
+    <x-alert />
 
-     <div class="mb-6">
+    <div class="mb-6">
         <a href="/" class="inline-flex items-center text-gray-600 hover:text-primary transition">
             <x-icons.arrow-left class="mr-2" />
             Retour aux propriétés

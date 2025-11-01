@@ -5,11 +5,9 @@
         </div>
 
         @if($properties->isEmpty())
-            <div class="empty-state">
-                <x-icons.building class="mx-auto text-gray-400 mb-4" />
-                <p class="empty-state-title">Aucune propriété disponible pour le moment</p>
-                <p class="empty-state-subtitle">Revenez plus tard ou contactez-nous pour plus d'informations</p>
-            </div>
+            <x-empty-state 
+                title="Aucune propriété disponible pour le moment" 
+                subtitle="Revenez plus tard ou contactez-nous pour plus d'informations" />
         @else
             <!-- Grille de propriétés -->
             <div class="grid-properties">

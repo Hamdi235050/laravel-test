@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 
 class BookingManager extends Component
 {
+    protected $listeners = ['close' => 'closeBookingModal'];
     public $search = '';
     public $statusFilter = 'all';
     public $maxPrice = '';
