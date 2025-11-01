@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $properties = \App\Models\Property::withCount('bookings')->paginate(9);
+    return view('properties.index', compact('properties'));
+})->name('home');
+
+Route::get('/property/{id}', function ($id) {
+    return view('property-details', ['propertyId' => $id]);
+})->name('property.details');
+
+Route::get('/bookings', function () {
+    return view('bookings');
+})->middleware(['auth'])->name('bookings');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
